@@ -5,8 +5,6 @@
 - Cambio ligero al buscar una persona
 - cambio del estado para manejar busquedas
 
-
-
 ## Version: [2.0.0]
 ## Fecha: 2025-03-29
 ## Autor: Joel Briones
