@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,17 +35,20 @@ public class PersonaController {
     }
 
     @GetMapping("/")
+    @CrossOrigin("*")
     public List<Persona> getPersonas() {
         return personaService.getPersonas();
     }
 
     @GetMapping("/{personaid}")
+    @CrossOrigin("*")
     public Optional<Persona> getPersonaID(@PathVariable("personaid") Long id) {
         return personaService.getPersonaID(id);
     }
-
+    
     // modificar persona
-    @PutMapping("/{personaid}")
+    @PutMapping("/modificar/{personaid}")
+    @CrossOrigin("*")
     public ResponseEntity<String> modificarPersona(@PathVariable("personaid") Long id, @RequestBody Persona persona) {
         if (!personaRepository.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("error en la operacion | persona no encontrada");
@@ -53,13 +57,15 @@ public class PersonaController {
         personaService.modificarPersona(persona);
         return ResponseEntity.ok("operacion correcta");
     }
-
+    
     @PostMapping("/guardar")
+    @CrossOrigin("*")
     public void guardarPersona(@RequestBody Persona persona) {
         personaService.guardarPersona(persona);
     }
-
+    
     @DeleteMapping("/eliminar/{personaid}")
+    @CrossOrigin("*")
     public void eliminarPersona(@PathVariable("personaid") Long id) {
         personaService.eliminarPersona(id);
     }
